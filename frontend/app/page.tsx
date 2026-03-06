@@ -27,7 +27,7 @@ export default function DeepShieldApp() {
     const endpoint = isRegistering ? '/register' : '/login';
 
     try {
-      const res = await fetch(`http://localhost:8000${endpoint}`, {
+      const res = await fetch(`https://deepshield-oefy.onrender.com${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: emailInput, password: passwordInput })
@@ -58,7 +58,7 @@ export default function DeepShieldApp() {
   // --- DASHBOARD LOGIC ---
   useEffect(() => {
     if (isAuthenticated) {
-      fetch('http://localhost:8000/health')
+      fetch('https://deepshield-oefy.onrender.com/health')
         .then(res => res.json())
         .then(data => setServerStatus(data.message))
         .catch(() => setServerStatus("Backend Offline"));
@@ -68,7 +68,7 @@ export default function DeepShieldApp() {
   const startScan = async () => {
     setIsScanning(true);
     try {
-      const res = await fetch('http://localhost:8000/scan');
+      const res = await fetch('https://deepshield-oefy.onrender.com/scan');
       const data = await res.json();
       setScanData({ threats: data.threats_found, darkWeb: data.dark_web, score: data.score });
     } catch (error) {
